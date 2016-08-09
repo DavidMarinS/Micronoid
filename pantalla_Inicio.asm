@@ -4,7 +4,7 @@
 section .data
 	num1: equ 1
 	num2: equ 3
-	num3: equ 23
+	num3: equ 22
 	num4: equ 11
 	
 	variablex: db ''
@@ -20,7 +20,7 @@ section .data
 	cons_tamanovacio: equ $-cons_Vacio		;contiene la cantidad de caracteres a imprimir
 
 	Press: db '|            Presione X para iniciar             |',0xa		;contiene el valor a imprimir
-	tamanoPress: equ $-cons_Vacio		;contiene la cantidad de caracteres a imprimir
+	tamanoPress: equ $-Press		;contiene la cantidad de caracteres a imprimir
 
 	cons_Piso: dw '+************************|***********************|',0xa		;contiene el valor a imprimir
 	cons_tamanoPiso: equ $-cons_Piso		;contiene la cantidad de caracteres a imprimir
@@ -76,8 +76,8 @@ _start:
 			
 			
 .InicioVacio:
-			mov rax, num3
-			add r8,num1
+			add r8,num1		
+			mov rax, num3			
 			cmp rax,r8
 			je .printpiso
 
@@ -92,7 +92,7 @@ _start:
 			je .Pulse
 			jne .InicioVacio
 .Pulse:
-
+			add r8,num1
 			mov rax,1
 			mov rdi,1
 			mov rsi,Press
