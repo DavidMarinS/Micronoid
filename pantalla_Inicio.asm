@@ -2,6 +2,7 @@
 ;Se definen las constantes que se van a usar en el programa
 
 section .data
+	num0: equ 0
 	num1: equ 1
 	num2: equ 3
 	num3: equ 22
@@ -106,21 +107,37 @@ _start:
 		
 
 .printpiso:
+			mov rax,num1
+			cmp rax,r9
+			je .final
+
 			mov rax,1
 			mov rdi,1
 			mov rsi,cons_Piso
 			mov rdx,cons_tamanoPiso
 			syscall
 			
+			mov rax,num1
+			cmp rax,r9
+			je .final
+			
+			mov r8,num1
+			mov r9,num1
+
+			mov rax,num1
+			mov rax,num1
+			cmp rax,rbx
+			je .Inicio
+			
+.final:			
 			mov rax,0							;rax = "sys_read"
 			mov rdi,0							;rdi = 0 (standard input = teclado)
 			mov rsi,variablex					;rsi = direccion de memoria donde se almacena la tecla captura
 			mov rdx,1							;rdx=1 (cuantos eventos o teclazos capturar)
 			syscall
 
+
 			mov rax,60						;se carga la llamada 60d (sys_exit) en rax
 			mov rdi,0							;en rdi se carga un 0
 			syscall								;se llama al sistema.
-
-
 
